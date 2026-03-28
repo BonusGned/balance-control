@@ -1,0 +1,54 @@
+settings:
+  check_interval_secs: 60
+  prometheus_port: 9090
+  telegram:
+    token: "YOUR_BOT_TOKEN"
+    chat_id: 123456789
+
+networks:
+  ethereum:
+    rpc_url: "https://eth-mainnet.g.alchemy.com/v2/YOUR_KEY"
+  bsc:
+    rpc_url: "https://bsc-dataseed.binance.org"
+  polygon:
+    rpc_url: "https://polygon-rpc.com"
+  tron:
+    mode: "http"
+    rpc_url: "https://api.trongrid.io"
+  solana:
+    rpc_url: "https://api.mainnet-beta.solana.com"
+
+accounts:
+  - address: "0x742d35Cc6634C0532925a3b844Bc9e7595f2bD18"
+    alias: "Main_EVM_HotWallet"
+    network: "ethereum"
+    threshold: 0.5
+    tokens:
+      - "native"
+      - "0xdAC17F958D2ee523a2206206994597C13D831ec7"
+      - "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"
+
+  - address: "0x742d35Cc6634C0532925a3b844Bc9e7595f2bD18"
+    alias: "BSC_Wallet"
+    network: "bsc"
+    threshold: 1.0
+    tokens:
+      - "native"
+      - "0x55d398326f99059fF775485246999027B3197955"
+
+  - address: "TN3W4H6rK2ce4vX9YnFQHwKENnHjoxb3m9"
+    alias: "Tron_HotWallet"
+    network: "tron"
+    threshold: 100.0
+    tokens:
+      - "native"
+      - "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t"
+
+  - address: "5ZWj7a1f8tWkjBESHKgrLCQirLhPwaUpGsZ2YdN3pMiV"
+    alias: "Solana_Wallet"
+    network: "solana"
+    threshold: 1.0
+    tokens:
+      - "native"
+      - "Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB"
+      - "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"

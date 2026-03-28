@@ -1,0 +1,28 @@
+services:
+  balance-control:
+    build: .
+    restart: unless-stopped
+    volumes:
+      - ./config.yaml:/app/config.yaml:ro
+    ports:
+      - "9090:9090"
+    networks:
+      - monitoring
+
+  prometheus:
+    image: prom/prometheus:latest
+    restart: unless-stopped
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus_data:/prometheus
+    ports:
+      - "9091:9090"
+    networks:
+      - monitoring
+
+volumes:
+  prometheus_data:
+
+networks:
+  monitoring:
+    driver: bridge

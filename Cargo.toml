@@ -1,0 +1,46 @@
+[package]
+name = "balance-control"
+version = "0.1.0"
+edition = "2024"
+description = "Multi-chain balance monitor with threshold alerting and Prometheus metrics"
+
+[lib]
+name = "balance_control"
+path = "src/lib.rs"
+
+[[bin]]
+name = "balance-control"
+path = "src/main.rs"
+
+[dependencies]
+tokio = { version = "1", features = ["full"] }
+alloy = { version = "1", features = ["full"] }
+solana-client = "3"
+solana-sdk = "4"
+spl-token = "9"
+spl-associated-token-account = "8"
+teloxide = { version = "0.17", features = ["macros"] }
+reqwest = { version = "0.13", features = ["json"] }
+prometheus = "0.14"
+axum = "0.8"
+serde = { version = "1", features = ["derive"] }
+serde_yaml = "0.9"
+serde_json = "1"
+rust_decimal = { version = "1", features = ["serde-with-str"] }
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+thiserror = "2"
+anyhow = "1"
+async-trait = "0.1"
+futures = "0.3"
+hex = "0.4"
+bs58 = "0.5"
+
+[dev-dependencies]
+tempfile = "3"
+rust_decimal_macros = "1"
+
+[profile.release]
+lto = true
+strip = true
+codegen-units = 1
