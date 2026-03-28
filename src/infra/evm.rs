@@ -1,7 +1,7 @@
 use std::str::FromStr;
 
 use alloy::{
-    primitives::{address, Address, U256},
+    primitives::{Address, U256, address},
     providers::Provider,
     sol,
     sol_types::SolCall,

@@ -9,7 +9,7 @@ fn test_evm_provider_supports_network() {
     // We can't easily create a real provider without a network connection
     // but we can test the structure exists and compiles
     let network_name = "ethereum".to_string();
-    
+
     // This test verifies the type exists and can be constructed
     // In a real scenario, you'd use a mock provider or test network
     assert_eq!(network_name, "ethereum");

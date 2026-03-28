@@ -1,7 +1,7 @@
+use async_trait::async_trait;
 use balance_control::domain::model::{MonitoredAccount, TokenBalance, TokenId};
 use balance_control::domain::ports::{BalanceProvider, MetricsRecorder, Notifier};
 use balance_control::domain::service::BalanceMonitorService;
-use async_trait::async_trait;
 use rust_decimal_macros::dec;
 use std::sync::{Arc, Mutex};
 use tokio::time::Duration;
@@ -28,7 +28,10 @@ impl TestBalanceProvider {
 
 #[async_trait]
 impl BalanceProvider for TestBalanceProvider {
-    async fn fetch_balances(&self, _account: &MonitoredAccount) -> anyhow::Result<Vec<TokenBalance>> {
+    async fn fetch_balances(
+        &self,
+        _account: &MonitoredAccount,
+    ) -> anyhow::Result<Vec<TokenBalance>> {
         *self.call_count.lock().unwrap() += 1;
         Ok(self.balances.clone())
     }

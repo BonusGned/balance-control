@@ -101,20 +101,14 @@ mod tests {
     #[test]
     fn test_token_id_parse_contract() {
         let addr = "0x1234567890abcdef";
-        assert_eq!(
-            TokenId::parse(addr),
-            TokenId::Contract(addr.to_string())
-        );
+        assert_eq!(TokenId::parse(addr), TokenId::Contract(addr.to_string()));
     }
 
     #[test]
     fn test_token_id_display_name() {
         assert_eq!(TokenId::Native.display_name(), "native");
         let addr = "0xabcd";
-        assert_eq!(
-            TokenId::Contract(addr.to_string()).display_name(),
-            addr
-        );
+        assert_eq!(TokenId::Contract(addr.to_string()).display_name(), addr);
     }
 
     #[test]

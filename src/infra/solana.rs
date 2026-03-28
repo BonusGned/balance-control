@@ -71,9 +71,7 @@ impl BalanceProvider for SolanaBalanceProvider {
                     "SOL".to_string(),
                 ),
                 TokenId::Contract(mint) => {
-                    let bal = self
-                        .fetch_spl_balance(&account.address, mint)
-                        .await?;
+                    let bal = self.fetch_spl_balance(&account.address, mint).await?;
                     let name = tokens::find_symbol(&self.network_name, mint)
                         .map(String::from)
                         .unwrap_or_else(|| mint.clone());

@@ -29,11 +29,7 @@ impl TronHttpProvider {
         Ok(Decimal::from(balance) / Decimal::from(10u64.pow(TRX_DECIMALS)))
     }
 
-    async fn fetch_trc20_balance(
-        &self,
-        owner: &str,
-        contract: &str,
-    ) -> anyhow::Result<Decimal> {
+    async fn fetch_trc20_balance(&self, owner: &str, contract: &str) -> anyhow::Result<Decimal> {
         let owner_hex = tron_base58_to_eth_hex(owner)?;
         let parameter = format!("{owner_hex:0>64}");
 
@@ -46,11 +42,16 @@ impl TronHttpProvider {
         });
 
         let url = format!("{}/wallet/triggerconstantcontract", self.base_url);
-        let resp: serde_json::Value = self.client.post(&url).json(&body).send().await?.json().await?;
+        let resp: serde_json::Value = self
+            .client
+            .post(&url)
+            .json(&body)
+            .send()
+            .await?
+            .json()
+            .await?;
 
-        let hex_result = resp["constant_result"][0]
-            .as_str()
-            .unwrap_or("0");
+        let hex_result = resp["constant_result"][0].as_str().unwrap_or("0");
         let raw = u128::from_str_radix(hex_result.trim_start_matches("0x"), 16).unwrap_or(0);
 
         let decimals = tokens::find_decimals(&self.network_name, contract).unwrap_or(6);
@@ -73,9 +74,7 @@ impl BalanceProvider for TronHttpProvider {
                     "TRX".to_string(),
                 ),
                 TokenId::Contract(addr) => {
-                    let bal = self
-                        .fetch_trc20_balance(&account.address, addr)
-                        .await?;
+                    let bal = self.fetch_trc20_balance(&account.address, addr).await?;
                     let name = tokens::find_symbol(&self.network_name, addr)
                         .map(String::from)
                         .unwrap_or_else(|| addr.clone());

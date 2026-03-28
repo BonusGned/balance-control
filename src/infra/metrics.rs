@@ -1,8 +1,8 @@
 use std::sync::Arc;
 
+use axum::Router;
 use axum::extract::State;
 use axum::routing::get;
-use axum::Router;
 use prometheus::{Encoder, GaugeVec, Opts, Registry, TextEncoder};
 use rust_decimal::prelude::ToPrimitive;
 
@@ -64,13 +64,13 @@ impl MetricsRecorder for PrometheusRecorder {
             self.balance_gauge.with_label_values(&labels).set(f);
         }
 
-        self.below_threshold_gauge
-            .with_label_values(&labels)
-            .set(if balance.is_below_threshold() {
+        self.below_threshold_gauge.with_label_values(&labels).set(
+            if balance.is_below_threshold() {
                 1.0
             } else {
                 0.0
-            });
+            },
+        );
     }
 }
 

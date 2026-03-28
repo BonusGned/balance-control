@@ -109,7 +109,10 @@ mod tests {
 
     #[async_trait]
     impl BalanceProvider for MockBalanceProvider {
-        async fn fetch_balances(&self, _account: &MonitoredAccount) -> anyhow::Result<Vec<TokenBalance>> {
+        async fn fetch_balances(
+            &self,
+            _account: &MonitoredAccount,
+        ) -> anyhow::Result<Vec<TokenBalance>> {
             Ok(self.balances.clone())
         }
 
