@@ -14,7 +14,7 @@ use domain::model::{MonitoredAccount, NetworkType};
 use domain::ports::BalanceProvider;
 use domain::service::BalanceMonitorService;
 use infra::evm::EvmBalanceProvider;
-use infra::metrics::{PrometheusRecorder, serve_metrics};
+use infra::metrics::{serve_metrics, PrometheusRecorder};
 use infra::solana::SolanaBalanceProvider;
 use infra::telegram::TelegramNotifier;
 use infra::tron_http::TronHttpProvider;

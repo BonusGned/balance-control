@@ -5,7 +5,7 @@ use super::model::{MonitoredAccount, TokenBalance};
 #[async_trait]
 pub trait BalanceProvider: Send + Sync {
     async fn fetch_balances(&self, account: &MonitoredAccount)
-    -> anyhow::Result<Vec<TokenBalance>>;
+        -> anyhow::Result<Vec<TokenBalance>>;
     fn supports_network(&self, network: &str) -> bool;
 }
 

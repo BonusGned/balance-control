@@ -1,8 +1,8 @@
 use std::sync::Arc;
 
-use axum::Router;
 use axum::extract::State;
 use axum::routing::get;
+use axum::Router;
 use prometheus::{Encoder, GaugeVec, Opts, Registry, TextEncoder};
 use rust_decimal::prelude::ToPrimitive;
 
