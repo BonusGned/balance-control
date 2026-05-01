@@ -43,12 +43,14 @@ impl BalanceMonitorService {
     }
 
     pub async fn check_cycle(&self) {
+        self.metrics.begin_cycle();
         let futs: Vec<_> = self
             .accounts
             .iter()
             .map(|acc| self.check_account(acc))
             .collect();
         join_all(futs).await;
+        self.metrics.end_cycle();
     }
 
     pub async fn check_account(&self, account: &MonitoredAccount) {

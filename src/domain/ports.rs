@@ -16,4 +16,12 @@ pub trait Notifier: Send + Sync {
 
 pub trait MetricsRecorder: Send + Sync {
     fn record_balance(&self, balance: &TokenBalance);
+
+    /// Called once at the start of a check cycle. Implementations may use it
+    /// to reset per-cycle bookkeeping (e.g. stale-series tracking).
+    fn begin_cycle(&self) {}
+
+    /// Called once after a check cycle finishes. Implementations may use it
+    /// to prune label series that were not observed during the cycle.
+    fn end_cycle(&self) {}
 }
